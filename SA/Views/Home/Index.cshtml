@@ -1,0 +1,51 @@
+﻿@using Microsoft.Extensions.Localization
+@using SA.Models
+
+@inject IStringLocalizer<Resource> localizer;
+@inject SignInManager<AplicationUser> signInManager;
+
+@{
+    ViewData["Title"] = "Cars";
+    Layout = "~/Views/_MainLayout.cshtml";
+}
+@{
+
+    ViewBag.Title = "Home Page";
+}
+
+
+@if (TempData["Make"] != null)
+{
+    <p class="alert alert-success">@localizer["SuccessfulInsert"] @TempData["Make"]</p>
+
+}
+
+
+
+@Html.Partial("_CarList")
+
+
+
+@section SideBar{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            This is page specific section
+        </div>
+        <div class="panel-body">
+
+            <ul>
+                <li><a href="/AboutUs/about">About Us</a></li>
+                <li><a href="/Contact/contactt">Contact</a></li>
+                <li><a href="/AddCars/Cars">AddCar</a></li>
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <li><a href="/Administration/listRoles">listRoles</a></li>
+
+                }
+            </ul>
+        </div>
+    </div>
+
+
+}
+

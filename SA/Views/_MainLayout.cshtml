@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="~/lib/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+
+    <script scr="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+</head>
+<body style="background-color:cornflowerblue;">
+
+    <ul class="list-inline col-md-2">
+        <li>@Html.ActionLink("en", "SetCulture", "Home", new { culture = "en", sourceUrl = Microsoft.AspNetCore.Http.Extensions.UriHelper.GetDisplayUrl(Context.Request) })</li>
+        <li>@Html.ActionLink("de", "SetCulture", "Home", new { culture = "de-DE", sourceUrl = Microsoft.AspNetCore.Http.Extensions.UriHelper.GetDisplayUrl(Context.Request) })</li>
+        <li>@Html.ActionLink("sr", "SetCulture", "Home", new { culture = "sr", sourceUrl = Microsoft.AspNetCore.Http.Extensions.UriHelper.GetDisplayUrl(Context.Request) })</li>
+
+    </ul>
+    @Html.Partial("/Views/_LoginPartial.cshtml")
+
+    <header class="page-header" style="background-color:sandybrown; ">
+        <h1 class="text-primary text-center" style="height:60px; color:black">CAR SALES</h1>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                @RenderBody()
+            </div>
+            <div class="col-lg-4">
+                @RenderSection("SideBar", false)
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="row" style="background:PapayaWhip; position:fixed; bottom:0; width:100%; ">
+        <p class="text-center">All rights reserved. <a href="http://www.link-group.eu/">LINK GROUP</a> 2019.</p>
+    </footer>
+</body>
+</html>
+
+@RenderSection("Scripts",false)

@@ -1,0 +1,89 @@
+﻿@using SA.Models;
+@using Microsoft.AspNetCore.Localization
+@model SA.Models.Car
+@using SA.Controllers
+
+
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Add Car:
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Create", "AddCars", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                @Html.Label("Car class: ")
+                @Html.TextBoxFor(m => m.Make, null, new { @class = "form-control", placeholder = "Make" })
+                @Html.ValidationMessageFor(m => m.Make, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Model: ")
+                @Html.TextBoxFor(m => m.Model, null, new { @class = "form-control", placeholder = "Model" })
+                @Html.ValidationMessageFor(m => m.Model, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Year: ")
+                @Html.TextBoxFor(m => m.Year, null, new { @class = "form-control", placeholder = "Year" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Engine Size: ")
+                @Html.TextBoxFor(m => m.Engine_Size, null, new { @class = "form-control", placeholder = "Engine Size" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Power KW: ")
+                @Html.TextBoxFor(m => m.Power_Kw, null, new { @class = "form-control", placeholder = "Power KW" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Fuel: ")
+                @Html.TextBoxFor(m => m.Fuel_Type, null, new { @class = "form-control", placeholder = "Fuel" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Body: ")
+                @Html.TextBoxFor(m => m.Body_Type, null, new { @class = "form-control", placeholder = "Body" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Price: ")
+                @Html.TextBoxFor(m => m.Price, null, new { @class = "form-control", placeholder = "Price" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Contact: ")
+                @Html.TextBoxFor(m => m.Contact, null, new { @class = "form-control", placeholder = "Contact" })
+            </div>
+            <div>
+                @Html.Label("Image: ")
+                <input name="ImageUpload" type="file" />
+                @if (!string.IsNullOrEmpty(Model.Image))
+                {
+                    <img src="@Model.Image" style="max-width: 100px; max-height: 100px;" />
+                }
+            </div>
+
+            <button class="btn btn-default" type="submit">Add</button>
+        }
+    </div>
+</div>
+
+
+
+
+
+@section SideBar{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            This is page specific section
+        </div>
+        <div class="panel-body">
+
+            <ul>
+                <li><a href="/AboutUs/about">About Us</a></li>
+                <li><a href="/Contact/contactt">Contact</a></li>
+                <li><a href="/Home/Index">Home Page</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+}

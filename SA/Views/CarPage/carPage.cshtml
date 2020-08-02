@@ -1,0 +1,80 @@
+﻿@using SA.Models;
+
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+    //Ovako sada prikazujemo fajl na View-u, potreba nam je base putanja do fajla i jedinstveno ime tog fajla,
+    //u ASP.NET Core aplikaciji se svi fajlovi vuku iz wwwroot foldera
+    //Dakle u bazi cuvamo samo jedinstveno ime fajla, jer moze se desiti da u nekom momentu hocemo da prebacimo folder
+    //sa fajlovima npr na drugi hard dist, i onda se to svodi samo na zamjenu basePath-a u konfiguraciji
+    string basePath = Configuration["FileUploads"];
+}
+
+@{
+    ViewData["Title"] = "carPage";
+    Layout = "~/Views/_MainLayout.cshtml";
+}
+
+
+
+<div>
+    <h2 style="font-family:'Times New Roman';font-weight:bold;">Car specifications</h2>
+</div>
+
+<img src="@("/" + basePath + "/" + ViewBag.specific_car.Image)" float:left; height="400px" width="500px" style="margin-bottom:10px;" />
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Car Page
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <tr>
+                <ul>
+                    <li>Class: @ViewBag.specific_car.Make</li>
+                    <li>Model: @ViewBag.specific_car.Model</li>
+                    <li>Year:  @ViewBag.specific_car.Year</li>
+                    <li>Engine:  @ViewBag.specific_car.Engine_Size</li>
+                    <li>KW:  @ViewBag.specific_car.Power_Kw</li>
+                    <li>Fule:  @ViewBag.specific_car.Fuel_Type</li>
+                    <li>Body:  @ViewBag.specific_car.Body_Type</li>
+                    <li>Price:  @ViewBag.specific_car.Price</li>
+                    <li>Contact:  @ViewBag.specific_car.Contact</li>
+                </ul>
+
+                @*<td>p</td>
+                <td>Class: @ViewBag.specific_car.Model</td>
+                
+                <td>Year @ViewBag.specific_car.Year</td>
+                <td>Kw @ViewBag.specific_car.Power_Kw</td>
+                <td>Fule Type @ViewBag.specific_car.Fuel_Type</td>*@
+
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+
+
+
+@section SideBar{
+    <div class="panel panel-default" style="float:right;">
+        <div class="panel-heading">
+            This is page specific section
+        </div>
+        <div class="panel-body">
+
+            <ul>
+
+                <li><a href="/">Home Page</a></li>
+                <li><a href="/Contact/contactt">Contact</a></li>
+                <li><a href="/AddCars/Cars">Add car</a></li>
+                <li><a href="/AboutUs/about">About Us</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+}

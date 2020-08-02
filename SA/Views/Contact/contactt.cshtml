@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_MainLayout.cshtml";
+}
+
+<div>
+    <h2 style="text-align: ">Contact us </h2>
+</div>
+<p>Contact us about anything related to our company or services.</p>
+<p>We'll do our best to get back to you as soon as possible.</p>
+<br />
+<div>
+    <label>Your Name</label><br />
+    <input type="text" name="yourName" style="width:300px;" />
+</div>
+<div>
+    <label>Email</label><br />
+    <input type="text" name="email" style="width:300px;" />
+</div>
+<div>
+    <label>Message</label><br />
+    <input type="text" name="message" style="height:300px; width:500px;" />
+</div><br />
+<button class="btn btn-group-sm" type="submit" style="width:100px">Send</button><br />
+<br />
+
+
+@section SideBar{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            This is page specific section
+        </div>
+        <div class="panel-body">
+
+            <ul>
+                <li><a href="/AboutUs/about">About Us</a></li>
+                <li><a href="/">Home Page</a></li>
+                <li><a href="/AddCars/Cars">Add car</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+}

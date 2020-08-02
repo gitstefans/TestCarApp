@@ -1,0 +1,80 @@
+﻿@using SA.Models;
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@inject SignInManager<AplicationUser> signInManager;
+
+@{
+    //Ovako sada prikazujemo fajl na View-u, potreba nam je base putanja do fajla i jedinstveno ime tog fajla,
+    //u ASP.NET Core aplikaciji se svi fajlovi vuku iz wwwroot foldera
+    //Dakle u bazi cuvamo samo jedinstveno ime fajla, jer moze se desiti da u nekom momentu hocemo da prebacimo folder
+    //sa fajlovima npr na drugi hard dist, i onda se to svodi samo na zamjenu basePath-a u konfiguraciji
+    string basePath = Configuration["FileUploads"];
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Cars:
+    </div>
+    <div class="panel-body">
+
+
+        @if (Auto.GetCar().Count == 0)
+        {
+            <p>Currently there is no cars. Add them!</p>
+
+        }
+        else
+        {
+            int counter = 0;
+
+            <table class="table table-condensed table-hover">
+                @foreach (Car car in Auto.GetCar())
+                {
+                    @using (Html.BeginForm("Delete", "Home", new { id = car.Id }))
+                    {
+                        counter++;
+
+                        <tr onclick="window.location='CarPage/carPage?id=@car.Id';" class="table" style="cursor:pointer">
+
+                            <td height="100">@car.Id</td>
+                            <td style="display:inline-block;">
+                                <img src="@("/" + basePath + "/" + car.Image) " float:left; height="100px" width="150px" style="margin-right:10px;" />
+
+                                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                {
+                                @Html.ActionLink("", "Home", new { id = car.Id })
+                                <input id="Submit1" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this?')" />
+                                } 
+
+                                <div style="background-color:lightgoldenrodyellow; float:right;">
+
+                                    <a href="CarPage/carPage?id=@car.Id">
+                                        @car.Make @car.Model @car.Year
+
+                                    </a>
+                                </div>
+
+
+                            </td>
+
+                        </tr>
+                    }
+
+                }
+
+            </table>
+
+            @*<script type="text/javascript">
+                    function redfunction() {
+                        location.href = "/CarPage/carPage"
+
+
+                    }
+                </script>*@
+
+
+        }
+
+    </div>
+</div>
+
